@@ -18,9 +18,9 @@ public class DonationRequestDto {
 
     private String location;
 
-    private User requester;  //USER who created the request
+    private UserDto requester;  //USER who created the request
 
-    private User assignedVolunteer;  //  VOLUNTEER assigned to verify
+    private UserDto assignedVolunteer;  //  VOLUNTEER assigned to verify
 
-    private VerificationRepost verificationRepost;
+    private VerificationReportDto verificationRepost;
 }

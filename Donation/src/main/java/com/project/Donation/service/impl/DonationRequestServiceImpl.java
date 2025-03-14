@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.project.Donation.util.AppUtil.getCurrentUser;
 
@@ -28,14 +29,16 @@ public class DonationRequestServiceImpl implements DonationRequestService {
 
 
     @Override
+    @Transactional
     public DonationRequestDto createDonationRequest(DonationRequestDto donationRequestDto) {
         User user=getCurrentUser();
 
         DonationRequest donationRequest=modelMapper.map(donationRequestDto,DonationRequest.class);
 
+        User volunteer=userService.getVolunteer(donationRequest.getCity());
         VerificationRepost verificationRepost=VerificationRepost.builder()
                         .status(VerificationStatus.PENDING)
-                        .assignedVolunteer(userService.getVolunteer(donationRequest.getLocation()))
+                        .assignedVolunteer(volunteer)
                         .build();
 
         VerificationRepost savedVerificationRepost=verificationRepostRepository.save(verificationRepost);
@@ -44,8 +47,8 @@ public class DonationRequestServiceImpl implements DonationRequestService {
         donationRequest.setRequester(user);
 
         donationRequest.setAmountCollected(0D);
+        donationRequest.setAssignedVolunteer(volunteer);
         DonationRequest savedDonationRequest=donationRequestRepository.save(donationRequest);
-
 
         return modelMapper.map(savedDonationRequest,DonationRequestDto.class);
     }

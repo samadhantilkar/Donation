@@ -8,7 +8,6 @@ import com.project.Donation.entity.User;
 import java.util.List;
 
 public interface UserService {
-    SignUpResponseDto signUp(SignUpRequestDto requestDto);
     User getUserById(Long id);
     UserDto getProfile(Long userId);
     User getVolunteer(String city);

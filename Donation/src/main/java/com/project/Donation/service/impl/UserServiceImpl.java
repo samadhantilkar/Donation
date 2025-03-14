@@ -1,7 +1,5 @@
 package com.project.Donation.service.impl;
 
-import com.project.Donation.dto.SignUpRequestDto;
-import com.project.Donation.dto.SignUpResponseDto;
 import com.project.Donation.dto.UserDto;
 import com.project.Donation.entity.Enum.ROLE;
 import com.project.Donation.entity.User;
@@ -33,19 +31,6 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public SignUpResponseDto signUp(SignUpRequestDto requestDto) {
-        Optional<User> user=userRepository.findByEmail(requestDto.getEmail());
-
-        if(user.isPresent()){
-                    throw new AuthenticationException("User is already present with email:"+requestDto.getEmail());
-        }
-        User createToUser=modelMapper.map(requestDto,User.class);
-//        createToUser.setRole(ROLE.USER);
-        userRepository.save(createToUser);
-        return new SignUpResponseDto();
-    }
-
-    @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow( ()->
                 new ResourceNotFoundException("User not found with Id:"+id));
@@ -62,9 +47,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
             throw new AuthenticationException("You are trying to access other user profile");
         }
 
-        UserDto userDto=modelMapper.map(user, UserDto.class);
-
-        return  userDto;
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
@@ -73,7 +56,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 
         users.sort((user1,user2) -> Integer.compare(user2.getVerificationReposts().size(),user1.getVerificationReposts().size()));
 
-        return !users.isEmpty()?users.getFirst():null;
+        return users.getFirst();
     }
 
     @Override

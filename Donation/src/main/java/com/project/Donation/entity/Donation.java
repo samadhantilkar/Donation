@@ -29,7 +29,7 @@ public class Donation extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "donor_id")
-    private User doner;
+    private User donor;
 
     @ManyToOne
     @JoinColumn(name = "donation_request_id")
