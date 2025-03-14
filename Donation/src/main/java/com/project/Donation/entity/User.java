@@ -1,6 +1,5 @@
 package com.project.Donation.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.Donation.entity.Enum.Gender;
 import com.project.Donation.entity.Enum.ROLE;
 import jakarta.persistence.*;
@@ -51,15 +50,11 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-//    @OneToMany(mappedBy = "donor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    private List<Donor> donationsMade;  // Donations sent by this user
-
     @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL)
     private List<DonationRequest> donationRequests;  // Requests created by this user
 
     @OneToMany(mappedBy = "assignedVolunteer",cascade = CascadeType.ALL)
-    private List<VerificationRepost> verificationReposts;    // Volunteer's verification tasks
+    private List<VerificationReport> verificationReports;    // Volunteer's verification tasks
 
 
     @Override

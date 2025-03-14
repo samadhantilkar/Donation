@@ -1,7 +1,5 @@
 package com.project.Donation.dto;
 
-import com.project.Donation.entity.User;
-import com.project.Donation.entity.VerificationRepost;
 import lombok.Data;
 
 @Data

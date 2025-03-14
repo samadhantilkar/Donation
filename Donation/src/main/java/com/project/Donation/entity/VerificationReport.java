@@ -1,7 +1,5 @@
 package com.project.Donation.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.Donation.entity.Enum.VerificationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +16,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VerificationRepost extends BaseEntity{
+public class VerificationReport extends BaseEntity{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -33,7 +31,6 @@ public class VerificationRepost extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "volunteer_id")
     private User assignedVolunteer;  // VOLUNTEER who verified
-
 
     @OneToOne
     @JoinColumn(name = "donation_request_id")

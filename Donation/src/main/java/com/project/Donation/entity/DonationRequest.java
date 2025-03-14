@@ -1,7 +1,5 @@
 package com.project.Donation.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,5 +43,5 @@ public class DonationRequest extends BaseEntity{
     private User assignedVolunteer;  //  VOLUNTEER assigned to verify
 
     @OneToOne(mappedBy = "donationRequest",cascade = CascadeType.ALL)
-    private VerificationRepost verificationRepost;   //Volunteer's report
+    private VerificationReport verificationReport;   //Volunteer's report
 }
