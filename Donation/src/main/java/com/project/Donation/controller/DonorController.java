@@ -19,6 +19,7 @@ public class DonorController {
     @PostMapping("/signup")
     public ResponseEntity<Void> signUpDonor(@RequestBody DonorDto dto){
         donorService.signUpDonor(dto);
+        return ResponseEntity.ok().build();
     }
 
 
