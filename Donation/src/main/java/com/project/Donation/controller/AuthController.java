@@ -1,7 +1,6 @@
 package com.project.Donation.controller;
 
 
-import com.project.Donation.Security.AuthService;
 import com.project.Donation.dto.LoginDto;
 import com.project.Donation.dto.LoginResponseDto;
 import com.project.Donation.dto.SignUpRequestDto;
@@ -28,38 +27,38 @@ import java.util.Arrays;
 @RequestMapping("/user")
 public class AuthController {
 
-    private final AuthService authService;
-
-    @PostMapping("/signUp")
-    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto){
-
-        SignUpResponseDto responseDto=authService.signUp(requestDto);
-
-        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginDto loginDto, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        String[] token=authService.login(loginDto);
-
-        Cookie cookie=new Cookie("refreshToken",token[1]);
-        cookie.setHttpOnly(true);
-
-        httpServletResponse.addCookie(cookie);
-
-        return ResponseEntity.ok(new LoginResponseDto(token[0]));
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<LoginResponseDto> refreshToken(HttpServletRequest httpServletRequest){
-        String refreshToken= Arrays.stream(httpServletRequest.getCookies())
-                .filter(cookie -> "refreshToken".equals(cookie.getName()))
-                .findFirst()
-                .map(Cookie::getValue)
-                .orElseThrow( ()-> new AuthenticationServiceException("Refresh Token not found inside the Cookies"));
-        String accessToken=authService.refreshToken(refreshToken);
-        return ResponseEntity.ok(new LoginResponseDto(accessToken));
-
-    }
+//    private final AuthService authService;
+//
+//    @PostMapping("/signUp")
+//    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto){
+//
+//        SignUpResponseDto responseDto=authService.signUp(requestDto);
+//
+//        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+//    }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginDto loginDto, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+//        String[] token=authService.login(loginDto);
+//
+//        Cookie cookie=new Cookie("refreshToken",token[1]);
+//        cookie.setHttpOnly(true);
+//
+//        httpServletResponse.addCookie(cookie);
+//
+//        return ResponseEntity.ok(new LoginResponseDto(token[0]));
+//    }
+//
+//    @PostMapping("/refresh")
+//    public ResponseEntity<LoginResponseDto> refreshToken(HttpServletRequest httpServletRequest){
+//        String refreshToken= Arrays.stream(httpServletRequest.getCookies())
+//                .filter(cookie -> "refreshToken".equals(cookie.getName()))
+//                .findFirst()
+//                .map(Cookie::getValue)
+//                .orElseThrow( ()-> new AuthenticationServiceException("Refresh Token not found inside the Cookies"));
+//        String accessToken=authService.refreshToken(refreshToken);
+//        return ResponseEntity.ok(new LoginResponseDto(accessToken));
+//
+//    }
 
 }

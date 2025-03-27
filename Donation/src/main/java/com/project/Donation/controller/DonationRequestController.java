@@ -14,22 +14,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/donationRequest")
 public class DonationRequestController {
-
-    private final DonationRequestService donationRequestService;
-
-    @PostMapping
-    private ResponseEntity<DonationRequestDto> donationRequest(@RequestBody DonationRequestDto donationRequestDto){
-        return new ResponseEntity<>(donationRequestService.createDonationRequest(donationRequestDto), HttpStatus.CREATED);
-    }
-
-    @GetMapping("my-donation-request")
-    private ResponseEntity<List<DonationRequestDto>> getMyDonationRequest(){
-        return ResponseEntity.ok(donationRequestService.getMyDonationRequest());
-    }
-
-    @GetMapping("/{requestId}")
-    public ResponseEntity<DonationRequestDto> getDonationRequestById(@PathVariable(name = "requestId")  Long requestId){
-        return ResponseEntity.ok(donationRequestService.getDonationRequestById(requestId));
-    }
+//
+//    private final DonationRequestService donationRequestService;
+//
+//    @PostMapping
+//    private ResponseEntity<DonationRequestDto> donationRequest(@RequestBody DonationRequestDto donationRequestDto){
+//        return new ResponseEntity<>(donationRequestService.createDonationRequest(donationRequestDto), HttpStatus.CREATED);
+//    }
+//
+//    @GetMapping("my-donation-request")
+//    private ResponseEntity<List<DonationRequestDto>> getMyDonationRequest(){
+//        return ResponseEntity.ok(donationRequestService.getMyDonationRequest());
+//    }
+//
+//    @GetMapping("/{requestId}")
+//    public ResponseEntity<DonationRequestDto> getDonationRequestById(@PathVariable(name = "requestId")  Long requestId){
+//        return ResponseEntity.ok(donationRequestService.getDonationRequestById(requestId));
+//    }
 
 }

@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -17,22 +19,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public class Donation extends BaseEntity{
-
-    @Column(nullable = false)
-    private Double amount;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
-
-    @Column(unique = true)
-    private String transactionId;
-
-    @ManyToOne
-    @JoinColumn(name = "donor_id")
-    private User donor; // User who made the donation
-
-    @ManyToOne
-    @JoinColumn(name = "donation_request_id")
-    private DonationRequest donationRequest;  // Approved request
-
+    private Long donorId;
+    private String DonationType;
+    private LocalDateTime donationDate;
 }
